@@ -4,29 +4,22 @@
  */
 
 // Use `xcodegen` first, then `open ./ComposeFallingBalls.xcodeproj` and then Run button in XCode.
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
+import com.uramnoil.practice.common.App
 import kotlinx.cinterop.*
 import platform.UIKit.*
 import platform.Foundation.*
 
 fun main() {
     val args = emptyArray<String>()
+    // argv.sizeだとエラーが発生する
+    val argc = args.size + 1
+    // スコープ終了時にスコープ内で割り当てられたメモリを自動的に廃棄するブロック
     memScoped {
-        val argc = args.size + 1
         val argv = (arrayOf("skikoApp") + args).map { it.cstr.ptr }.toCValues()
+        // https://developer.apple.com/documentation/foundation/nsautoreleasepool
         autoreleasepool {
+            // https://developer.apple.com/documentation/uikit/1622933-uiapplicationmain
             UIApplicationMain(argc, argv, null, NSStringFromClass(SkikoAppDelegate))
         }
     }
@@ -51,44 +44,5 @@ class SkikoAppDelegate : UIResponder, UIApplicationDelegateProtocol {
         }
         window!!.makeKeyAndVisible()
         return true
-    }
-}
-
-@Composable
-fun App() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-    ) {
-        val infiniteTransition = rememberInfiniteTransition()
-        // 0 - 360
-        val float by infiniteTransition.animateFloat(
-            0f,
-            360f,
-            animationSpec = infiniteRepeatable(animation = tween(10000))
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()
-        ) {
-            val times = 30
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-            ) {
-                repeat(times) {
-                    Box(
-                        modifier = Modifier
-                            .background(Color.hsl((float + it) % 360, 1f, 0.5f))
-                            .fillMaxWidth(1f)
-                            .weight(1f / times)
-                    )
-                }
-            }
-        }
     }
 }
