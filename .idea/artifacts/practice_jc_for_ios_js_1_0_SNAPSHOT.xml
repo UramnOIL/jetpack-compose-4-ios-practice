@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="practice-jc-for-ios-js-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="practice-jc-for-ios-js-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="practice-jc-for-ios.jsMain" />
+    </root>
+  </artifact>
+</component>
