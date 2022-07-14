@@ -3,6 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE.txt file.
  */
 
+// package文を書くとエラー
+
 // Use `xcodegen` first, then `open ./ComposeFallingBalls.xcodeproj` and then Run button in XCode.
 import androidx.compose.ui.window.Application
 import com.uramnoil.practice.common.App
@@ -12,7 +14,7 @@ import platform.Foundation.*
 
 fun main() {
     val args = emptyArray<String>()
-    // argv.sizeだとエラーが発生する
+    // argv.sizeだとエラー
     val argc = args.size + 1
     // スコープ終了時にスコープ内で割り当てられたメモリを自動的に廃棄するブロック
     memScoped {
