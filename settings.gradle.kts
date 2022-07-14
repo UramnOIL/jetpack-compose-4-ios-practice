@@ -16,4 +16,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "practice-jc-for-ios"
+rootProject.name = "jetpack-compose-for-ios-practice"
